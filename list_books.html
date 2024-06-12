@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista Libri</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2>Cerca Libri</h2>
+        
+        <div id="ListBooks" class="mt-4">
+            <!-- Risultati della ricerca -->
+        </div>
+    </div>
+
+    <script src="scripts.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            fetch(`get_data.php?type=libri`)
+                .then(response => response.json())
+                .then(data => {
+                    const resultsDiv = document.getElementById('ListBooks');
+                    resultsDiv.innerHTML = '';
+                    if (data.length > 0) {
+                        const table = document.createElement('table');
+                        table.classList.add('table', 'table-bordered');
+                        const thead = document.createElement('thead');
+                        thead.innerHTML = '<tr><th>ISBN</th><th>Titolo</th><th>Autore</th><th>Categoria</th></tr>';
+                        table.appendChild(thead);
+                        const tbody = document.createElement('tbody');
+                        data.forEach(book => {
+                            const tr = document.createElement('tr');
+                            tr.innerHTML = `<td>${book.ISBN}</td><td>${book.Titolo}</td><td>${book.Autore}</td><td>${book.Categoria}</td>`;
+                            tbody.appendChild(tr);
+                        });
+                        table.appendChild(tbody);
+                        resultsDiv.appendChild(table);
+                    } else {
+                        resultsDiv.textContent = 'Nessun libro trovato.';
+                    }
+                });
+        });
+        
+        /*document.addEventListener('DOMContentLoaded', function() {
+            fetch('get_data.php?type=libri')
+                .then(response => response.json())
+                .then(data => {
+                    console.log('JSON data:', data);
+                    const resultsDiv = document.getElementById('booksList');
+                    if (data.length > 0) {
+                        const table = document.createElement('table');
+                        table.classList.add('table', 'table-bordered');
+                        const thead = document.createElement('thead');
+                        thead.innerHTML = '<tr><th>ISBN</th><th>Titolo</th><th>Autore</th><th>Categoria</th></tr>';
+                        table.appendChild(thead);
+                        const tbody = document.createElement('tbody');
+                        data.forEach(book => {
+                            const tr = document.createElement('tr');
+                            tr.innerHTML = `<td>${book.ISBN}</td><td>${book.Titolo}</td><td>${book.Autore}</td><td>${book.Categoria}</td>`;
+                            tbody.appendChild(tr);
+                        });
+                        table.appendChild(tbody);
+                        resultsDiv.appendChild(table);
+                    } else {
+                        resultsDiv.textContent = 'Nessun libro trovato.';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    document.getElementById('booksList').textContent = 'Errore nel caricamento dei dati.';
+                });
+        });*/
+
+        /*document.addEventListener('DOMContentLoaded', function() {
+        fetch('get_data.php?type=libri')
+            .then(response => {
+                console.log('Raw response:', response);
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('JSON data:', data);
+                const resultsDiv = document.getElementById('booksList');
+                if (data.error) {
+                    resultsDiv.textContent = 'Errore: ' + data.error;
+                } else if (data.length > 0) {
+                    const table = document.createElement('table');
+                    table.classList.add('table', 'table-bordered');
+                    const thead = document.createElement('thead');
+                    thead.innerHTML = '<tr><th>ISBN</th><th>Titolo</th><th>Autore</th><th>Categoria</th></tr>';
+                    table.appendChild(thead);
+                    const tbody = document.createElement('tbody');
+                    data.forEach(book => {
+                        const tr = document.createElement('tr');
+                        tr.innerHTML = `<td>${book.ISBN}</td><td>${book.Titolo}</td><td>${book.Autore}</td><td>${book.Categoria}</td>`;
+                        tbody.appendChild(tr);
+                    });
+                    table.appendChild(tbody);
+                    resultsDiv.appendChild(table);
+                } else {
+                    resultsDiv.textContent = 'Nessun libro trovato.';
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                document.getElementById('booksList').textContent = 'Errore nel caricamento dei dati.';
+            });
+    });*/
+    
+    </script>
+</body>
+</html>

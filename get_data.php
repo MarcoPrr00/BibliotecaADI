@@ -23,17 +23,18 @@ switch ($type) {
         break;
     case 'libri':
         
-        $sql = "SELECT l.ID_libro, L.ISBN, L.Titolo, CONCAT(A.Nome, ' ', A.Cognome) AS Autore, C.Descrizione AS Categoria 
+        $sql = "SELECT L.ID_libro, L.ISBN, L.quantita, L.Titolo, CONCAT(A.Nome, ' ', A.Cognome) AS Autore, C.Descrizione AS Categoria 
                 FROM Libro L 
                 JOIN LibroAutore LA ON L.ID_libro = LA.ID_libro
                 JOIN Autore A ON LA.ID_autore = A.ID_autore
                 JOIN Categoria C ON L.ID_categoria = C.ID_categoria";
         break;
     case 'prestiti':
-        $sql = "SELECT P.ID_prestito, CONCAT(U.Nome, ' ', U.Cognome) AS Utente, P.ISBN, L.Titolo, P.Data_inizio, P.Data_scadenza 
+        $sql = "SELECT P.ID_prestito, CONCAT(U.Nome, ' ', U.Cognome) AS Utente, P.ISBN, L.Titolo, P.Data_inizio, P.Data_scadenza, P.Data_restituzione, DATEDIFF(P.Data_scadenza,P.Data_inizio) AS Giorni_Rimasti 
                 FROM Prestito P 
                 JOIN Utente U ON P.ID_utente = U.ID_utente
-                JOIN Libro L ON P.ISBN = L.ISBN";
+                JOIN Libro L ON P.ISBN = L.ISBN
+                ORDER BY P.Data_inizio DESC";
         break;
     case 'search_books':
         $query = $_GET['query'];

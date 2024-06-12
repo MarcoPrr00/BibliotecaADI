@@ -27,12 +27,20 @@
                         const table = document.createElement('table');
                         table.classList.add('table', 'table-bordered');
                         const thead = document.createElement('thead');
-                        thead.innerHTML = '<tr><th>ID Prestito</th><th>Utente</th><th>Libro (ISBN)</th><th>Titolo</th><th>Data Inizio</th><th>Data Fine</th></tr>';
+                        thead.innerHTML = '<tr><th>Utente</th><th>Libro (ISBN)</th><th>Titolo</th><th>Data Inizio</th><th>Data Fine</th><th>Data Restituzione</th></th><th>Giorni Restanti</th></tr>';
                         table.appendChild(thead);
                         const tbody = document.createElement('tbody');
                         data.forEach(loan => {
                             const tr = document.createElement('tr');
-                            tr.innerHTML = `<td>${loan.ID_prestito}</td><td>${loan.Utente}</td><td>${loan.ISBN}</td><td>${loan.Titolo}</td><td>${loan.Data_inizio}</td><td>${loan.Data_scadenza}</td>`;
+                            $loanGiorniRimasti=`${loan.Giorni_Rimasti}`;
+                            //tr.innerHTML = `<td>${loan.Utente}</td><td>${loan.ISBN}</td><td>${loan.Titolo}</td><td>${loan.Data_inizio}</td><td>${loan.Data_scadenza}</td><td>${loan.Data_restituzione}</td>`;
+                            if($loanGiorniRimasti>30){
+                                tr.innerHTML = `<td>${loan.Utente}</td><td>${loan.ISBN}</td><td>${loan.Titolo}</td><td>${loan.Data_inizio}</td><td>${loan.Data_scadenza}</td><td>${loan.Data_restituzione}</td><td class="table-success text-success"><b>${loan.Giorni_Rimasti}</b></td>`;
+                            }else if($loanGiorniRimasti<10){
+                                tr.innerHTML = `<td>${loan.Utente}</td><td>${loan.ISBN}</td><td>${loan.Titolo}</td><td>${loan.Data_inizio}</td><td>${loan.Data_scadenza}</td><td>${loan.Data_restituzione}</td><td class="table-danger text-danger"><b>${loan.Giorni_Rimasti}</b></td>`;
+                            }else{
+                                tr.innerHTML = `<td>${loan.Utente}</td><td>${loan.ISBN}</td><td>${loan.Titolo}</td><td>${loan.Data_inizio}</td><td>${loan.Data_scadenza}</td><td>${loan.Data_restituzione}</td><td class="table-warning text-warning"><b>${loan.Giorni_Rimasti}</b></td>`;
+                            }
                             tbody.appendChild(tr);
                         });
                         table.appendChild(tbody);

@@ -27,12 +27,16 @@
                         const table = document.createElement('table');
                         table.classList.add('table', 'table-bordered');
                         const thead = document.createElement('thead');
-                        thead.innerHTML = '<tr><th>ID</th><th>Nome</th><th>Cognome</th><th>Indirizzo</th><th>Data di Nascita</th><th>Numero di Telefono</th></tr>';
+                        thead.innerHTML = '<tr><th>ID</th><th>Nome</th><th>Cognome</th><th>Indirizzo</th><th>Data di Nascita</th><th>Numero di Telefono</th><th>Azioni Disponibili</th></tr>';
                         table.appendChild(thead);
                         const tbody = document.createElement('tbody');
                         data.forEach(user => {
                             const tr = document.createElement('tr');
-                            tr.innerHTML = `<td>${user.ID_utente}</td><td>${user.Nome}</td><td>${user.Cognome}</td><td>${user.Indirizzo}</td><td>${user.Data_nascita}</td><td>${user.Numero_telefono}</td>`;
+                            tr.innerHTML = `<td>${user.ID_utente}</td><td>${user.Nome}</td><td>${user.Cognome}</td><td>${user.Indirizzo}</td><td>${user.Data_nascita}</td><td>${user.Numero_telefono}</td>
+                            <td>
+                                <a href="edit_user.html?id=${user.ID_utente}" class="btn btn-warning btn-sm">Modifica</a>
+                                <button class="btn btn-danger btn-sm" onclick="deleteUser(${user.ID_utente})">Elimina</button>
+                            </td>`;
                             tbody.appendChild(tr);
                         });
                         table.appendChild(tbody);
@@ -42,6 +46,25 @@
                     }
                 });
         });
+
+        function deleteUser(id) {
+            if (confirm('Sei sicuro di voler eliminare questo utente?')) {
+                fetch(`delete_user.php?id=${id}`, { method: 'GET' })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            alert('Utente eliminato con successo');
+                            location.reload();
+                        } else {
+                            alert('Errore durante l\'eliminazione dell\'utente');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert('Errore durante l\'eliminazione dell\'utente');
+                    });
+            }
+        }
     </script>
 </body>
 </html>

@@ -26,12 +26,16 @@
                         const table = document.createElement('table');
                         table.classList.add('table', 'table-bordered');
                         const thead = document.createElement('thead');
-                        thead.innerHTML = '<tr><th>ID</th><th>Nome</th><th>Cognome</th></tr>';
+                        thead.innerHTML = '<tr><th>ID</th><th>Nome</th><th>Cognome</th><th>Azioni Disponibili</th></tr>';
                         table.appendChild(thead);
                         const tbody = document.createElement('tbody');
                         data.forEach(author => {
                             const tr = document.createElement('tr');
-                            tr.innerHTML = `<td>${author.ID_autore}</td><td>${author.Nome}</td><td>${author.Cognome}</td>`;
+                            tr.innerHTML = `<td>${author.ID_autore}</td><td>${author.Nome}</td><td>${author.Cognome}</td>
+                            <td>
+                                <a href="edit_author.html?id=${author.ID_autore}" class="btn btn-warning btn-sm">Modifica</a>
+                                <button class="btn btn-danger btn-sm" onclick="deleteAuthor(${author.ID_autore})">Elimina</button>
+                            </td>`;
                             tbody.appendChild(tr);
                         });
                         table.appendChild(tbody);
@@ -41,6 +45,25 @@
                     }
                 });
         });
+
+        function deleteAuthor(id) {
+            if (confirm('Sei sicuro di voler eliminare questo autore?')) {
+                fetch(`delete_author.php?id=${id}`, { method: 'GET' })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            alert('Autore eliminato con successo');
+                            location.reload();
+                        } else {
+                            alert('Errore durante l\'eliminazione dell\'autore');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert('Errore durante l\'eliminazione dell\'autore');
+                    });
+            }
+        }
     </script>
 </body>
 </html>

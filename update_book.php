@@ -24,7 +24,7 @@ try {
     $stmt->execute();
 
     if ($stmt->affected_rows > 0) {
-        echo "Libro aggiunto con successo.";
+        echo "Libro modificato con successo.";
     } else {
         $response['success'] = false;
         $response['error'] = 'Nessun libro trovato con questo ISBN o nessuna modifica apportata';

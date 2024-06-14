@@ -55,7 +55,6 @@
         document.addEventListener('DOMContentLoaded', function() {
             const urlParams = new URLSearchParams(window.location.search);
             const isbn = urlParams.get('isbn');
-            
 
             fetch(`get_book.php?isbn=${isbn}`)
                 .then(response => response.json())
@@ -69,7 +68,16 @@
                         document.getElementById('numero_pagine').value = data.Numero_pagine;
                         document.getElementById('casa_editrice').value = data.Casa_editrice;
                         document.getElementById('quantita').value = data.quantita;
-                        
+                        console.log("data", data)
+                        var dataAutore=data.ID_autore;
+                        var dataCategoria=data.ID_categoria;
+                        fetch('get_data.php?type=categorie')
+                        .then(response => response.json())
+                        .then(data => populateSelect('categoria', data, dataCategoria));
+                    
+                        fetch('get_data.php?type=autori')
+                        .then(response => response.json())
+                        .then(data => populateSelect('autore', data, dataAutore));
                         
                     }
                 })
@@ -78,24 +86,36 @@
                     alert('Errore nel caricamento dei dati.');
                 });
 
-            fetch('get_data.php?type=categorie')
-                .then(response => response.json())
-                .then(data => populateSelect('categoria', data));
-            
-            fetch('get_data.php?type=autori')
-                .then(response => response.json())
-                .then(data => populateSelect('autore', data));
-        
+                document.getElementById('editBookForm').addEventListener('submit', function(event) {
+                event.preventDefault();
+                const formData = new FormData(this);
+                fetch('update_book.php', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.text())
+                .then(data => {
+                    alert(data);
+                    window.location.reload();
+                });
+            });
+
             });
 
             
 
-        function populateSelect(selectId, data) {
+        function populateSelect(selectId, data, datatmp) {
             const select = document.getElementById(selectId);
             data.forEach(item => {
                 const option = document.createElement('option');
                 option.value = item.ID_categoria || item.ID_autore;
                 option.textContent = item.Descrizione || item.Nome + ' ' + item.Cognome;
+                console.log("option", parseInt(option.value))
+                console.log("data", datatmp);
+                if(parseInt(option.value) == datatmp){
+                    option.selected = true;
+                }
+
                 select.appendChild(option);
             });
         }

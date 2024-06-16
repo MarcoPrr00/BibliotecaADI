@@ -30,7 +30,7 @@ switch ($type) {
                 JOIN Categoria C ON L.ID_categoria = C.ID_categoria";
         break;
     case 'prestiti':
-        $sql = "SELECT P.ID_prestito, CONCAT(U.Nome, ' ', U.Cognome) AS Utente, P.ISBN, L.Titolo, P.Data_inizio, P.Data_scadenza, P.Data_restituzione, DATEDIFF(P.Data_scadenza,P.Data_inizio) AS Giorni_Rimasti 
+        $sql = "SELECT P.ID_prestito, CONCAT(U.Nome, ' ', U.Cognome) AS Utente, P.ISBN, L.Titolo, P.Data_inizio, P.Data_scadenza, P.Data_restituzione, DATEDIFF(P.Data_scadenza,current_date) AS Giorni_Rimasti 
                 FROM Prestito P 
                 JOIN Utente U ON P.ID_utente = U.ID_utente
                 JOIN Libro L ON P.ISBN = L.ISBN

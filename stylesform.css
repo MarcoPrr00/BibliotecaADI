@@ -1,0 +1,51 @@
+body{
+    background-image: url(bibbia2.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh;
+   }
+   .titolo{
+      color: rgb(236, 236, 236);
+      text-align: center;
+      margin-top: 6%;
+   
+      font-family: "Trirong", serif;
+     
+  }
+   .divform{
+     
+background-color:rgb(245, 242, 237);
+width: 65%;
+
+margin-left: 17%;
+margin-top:3.5% ;
+margin-bottom: 5%;
+height: auto;
+border-radius: 10px;
+
+
+
+   }
+   .mb-3{
+      padding-top: 1%;
+      padding-left: 2%;
+  
+   }
+   .form-label{
+      padding-right: 2%;
+      font-size: 18px;
+   }
+   .form-control{
+      width: 95%;
+      border-radius: 10px;
+      
+   }
+#bsave{
+  margin-bottom: 3%;
+  margin-top: 5%;
+  margin-left: 2%;
+}
+h2{
+    padding-top: 1%;
+}

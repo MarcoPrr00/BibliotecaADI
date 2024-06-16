@@ -5,49 +5,118 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aggiungi Libro</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="stylesform.css">
 </head>
 <body>
-    <div class="container mt-5">
-        <h2>Aggiungi Libro</h2>
-        <form id="addBookForm">
-            <div class="mb-3">
-                <label for="isbn" class="form-label">ISBN</label>
-                <input type="text" class="form-control" name="isbn" id="isbn" required>
+    <nav class="navbar navbar-dark bg-dark fixed-top">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="index.html"><b>Biblioteca ADI Andria</b></a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
+            <div class="offcanvas-header">
+              <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel"><B> BIBLIOTECA ADI ANDRIA</B></h5>
+              <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
-            <div class="mb-3">
-                <label for="titolo" class="form-label">Titolo</label>
-                <input type="text" class="form-control" name="titolo" id="titolo" required>
-            </div>
-            <div class="mb-3">
-                <label for="data_pubblicazione" class="form-label">Numero Pagine</label>
-                <input type="number" class="form-control" name="numero_pagine" id="numero_pagine">
-            </div>
-            <div class="mb-3">
-                <label for="casa_editrice" class="form-label">Casa Editrice</label>
-                <input type="text" class="form-control" name="casa_editrice" id="casa_editrice" required>
-            </div>
-            <div class="mb-3">
-                <label for="casa_editrice" class="form-label">Quantità in Magazino</label>
-                <input type="number" class="form-control" name="quantita" id="quantita" required>
-            </div>
-            <div class="mb-3">
-                <label for="categoria" class="form-label">Categoria</label>
-                <select class="form-control" name="categoria" id="categoria" required>
-                    <!-- Populated by JavaScript -->
-                </select>
-            </div>
-            <div class="mb-3">
-                <label for="autore" class="form-label">Autore</label>
-                <select class="form-control" name="autore" id="autore" required>
-                    <!-- Populated by JavaScript -->
-                </select>
-            </div>
-            <button type="submit" class="btn btn-primary">Aggiungi Libro</button>
-        </form>
-    </div>
+            <div class="offcanvas-body">
+              <div class="list-group" style="width: 50%;">
+                <a href="index.html" class="list-group-item list-group-item-action active" aria-current="true" style="width: 200%;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house-door-fill" viewBox="0 0 16 16" style="margin-bottom: 5px;">
+                        <path d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5"/>
+                      </svg>
+        Menu
+                </a>
+                <a href="search_books.html" class="list-group-item list-group-item-action" style="width: 200%;" id="cercalibri">   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16" style="margin-right: 5px;">
+                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+                  </svg>Cerca Libri </a>
+            
+                <a href="list_loans.html" class="list-group-item list-group-item-action" style="width: 200%;"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-book-half" viewBox="0 0 16 16" style="margin-right: 5px;">
+                    <path d="M8.5 2.687c.654-.689 1.782-.886 3.112-.752 1.234.124 2.503.523 3.388.893v9.923c-.918-.35-2.107-.692-3.287-.81-1.094-.111-2.278-.039-3.213.492zM8 1.783C7.015.936 5.587.81 4.287.94c-1.514.153-3.042.672-3.994 1.105A.5.5 0 0 0 0 2.5v11a.5.5 0 0 0 .707.455c.882-.4 2.303-.881 3.68-1.02 1.409-.142 2.59.087 3.223.877a.5.5 0 0 0 .78 0c.633-.79 1.814-1.019 3.222-.877 1.378.139 2.8.62 3.681 1.02A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.293-.455c-.952-.433-2.48-.952-3.994-1.105C10.413.809 8.985.936 8 1.783"/>
+                  </svg>Prestiti attivi</a>
+                <a href="add_author.html" class="list-group-item list-group-item-action" style="width: 200%;"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16" style="margin-right: 5px;">
+                  <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.5.5 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11z"/>
+                </svg>Aggiungi Autore</a>
+                <a href="add_user.html" class="list-group-item list-group-item-action" style="width: 200%;"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill-add" viewBox="0 0 16 16" style="margin-right: 5px;">
+                  <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7m.5-5v1h1a.5.5 0 0 1 0 1h-1v1a.5.5 0 0 1-1 0v-1h-1a.5.5 0 0 1 0-1h1v-1a.5.5 0 0 1 1 0m-2-6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+                  <path d="M2 13c0 1 1 1 1 1h5.256A4.5 4.5 0 0 1 8 12.5a4.5 4.5 0 0 1 1.544-3.393Q8.844 9.002 8 9c-5 0-6 3-6 4"/>
+                </svg>Aggiungi Utente</a>
+                <a href="add_book.html" class="list-group-item list-group-item-action" style="width: 200%;"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16" style="margin-right: 5px;">
+                  <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3z"/>
+                </svg>Aggiungi Libro</a>
+                <a href="add_loan.html" class="list-group-item list-group-item-action" style="width: 200%;"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-plus-fill" viewBox="0 0 16 16" style="margin-right: 5px;">
+                    <path d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0M9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1M8.5 7v1.5H10a.5.5 0 0 1 0 1H8.5V11a.5.5 0 0 1-1 0V9.5H6a.5.5 0 0 1 0-1h1.5V7a.5.5 0 0 1 1 0"/>
+                  </svg>Aggiungi Prestito</a>
+                <a href="list_books.html" class="list-group-item list-group-item-action" style="width: 200%;"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-journal-text" viewBox="0 0 16 16"  style="margin-right: 5px;">
+                  <path d="M5 10.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5m0-2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5m0-2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5m0-2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5"/>
+                  <path d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-1h1v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v1H1V2a2 2 0 0 1 2-2"/>
+                  <path d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1z"/>
+                </svg>Lista Libri</a>
+  
+                <a href="list_authors.html" class="list-group-item list-group-item-action" style="width: 200%;"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-badge-fill" viewBox="0 0 16 16" style="margin-right: 5px;">
+                  <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2zm4.5 0a.5.5 0 0 0 0 1h3a.5.5 0 0 0 0-1zM8 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6m5 2.755C12.146 12.825 10.623 12 8 12s-4.146.826-5 1.755V14a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1z"/>
+                </svg>Lista Autori</a>
+            
+  
+                <a href="list_users.html" class="list-group-item list-group-item-action" style="width: 200%;"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-person" viewBox="0 0 16 16" style="margin-right: 5px;">
+                  <path d="M11 8a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+                  <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2M9.5 3A1.5 1.5 0 0 0 11 4.5h2v9.255S12 12 8 12s-5 1.755-5 1.755V2a1 1 0 0 1 1-1h5.5z"/>
+                </svg>Lista Utenti</a>
+  
+               
+               
+          </div>
+        </div>
+      </nav>
 
-    <script src="scripts.js"></script>
+  
+    <div class="divform">
+    
+        
+        <div class="container mt-5">
+            <h2>Aggiungi Libro</h2>
+            <form id="editBookForm">
+                <div class="mb-3" style="display: none;">
+                    <label for="ID_Libro" class="form-label">ID_Libro</label>
+                    <input type="text" class="form-control" id="ID_Libro" name="ID_Libro" readonly >
+                </div>
+                <div class="mb-3">
+                    <label for="isbn" class="form-label">ISBN</label>
+                    <input type="text" class="form-control" id="isbn" name="isbn" required>
+                </div>
+                <div class="mb-3">
+                    <label for="titolo" class="form-label">Titolo</label>
+                    <input type="text" class="form-control" id="titolo" name="titolo" required>
+                </div>
+                <div class="mb-3">
+                    <label for="data_pubblicazione" class="form-label">Numero Pagine</label>
+                    <input type="number" class="form-control" name="numero_pagine" id="numero_pagine">
+                </div>
+                <div class="mb-3">
+                    <label for="casa_editrice" class="form-label">Casa Editrice</label>
+                    <input type="text" class="form-control" name="casa_editrice" id="casa_editrice" required>
+                </div>
+                <div class="mb-3">
+                    <label for="quantita" class="form-label">N° Copie</label>
+                    <input type="number" class="form-control" name="quantita" id="quantita" required>
+                </div>
+                <div class="mb-3">
+                    <label for="categoria" class="form-label">Categoria</label>
+                    <select class="form-control" name="categoria" id="categoria" required>
+                        <!-- Populated by JavaScript -->
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="autore" class="form-label">Autore</label>
+                    <select class="form-control" name="autore" id="autore" required>
+                        <!-- Populated by JavaScript -->
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary" id="bsave" >Aggiungi Libro</button>
+            </form>
+        </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>   <script src="scripts.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             fetch('get_data.php?type=categorie')

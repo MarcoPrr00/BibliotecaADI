@@ -35,18 +35,32 @@
                 <label for="quantita" class="form-label">Quantità in Magazino</label>
                 <input type="number" class="form-control" name="quantita" id="quantita" required>
             </div>
+            <!--
             <div class="mb-3">
                 <label for="categoria" class="form-label">Categoria</label>
                 <select class="form-control" name="categoria" id="categoria" required>
-                    <!-- Populated by JavaScript -->
+                    <!-Populated by JavaScript ->
                 </select>
             </div>
+            -->
             <div class="mb-3">
                 <label for="autore" class="form-label">Autore</label>
                 <select class="form-control" name="autore" id="autore" required>
                     <!-- Populated by JavaScript -->
                 </select>
             </div>
+
+            <div id="prestitoDetails" style="display: none;">
+                <div class="mb-3">
+                    <label for="dataInizio" class="form-label">Data Inizio Prestito</label>
+                    <input type="date" class="form-control" id="dataInizio" name="dataInizio">
+                </div>
+                <div class="mb-3">
+                    <label for="dataFine" class="form-label">Data Fine Prestito</label>
+                    <input type="date" class="form-control" id="dataFine" name="dataFine">
+                </div>
+            </div>
+           
             <button type="submit" class="btn btn-primary">Salva Modifiche</button>
             <a href="list_books.html">   <button type="button" class=" btn btn-danger">Annulla</button></a>
         </form>
@@ -70,13 +84,19 @@
                         document.getElementById('numero_pagine').value = data.Numero_pagine;
                         document.getElementById('casa_editrice').value = data.Casa_editrice;
                         document.getElementById('quantita').value = data.quantita;
+                        if(data.Prestato==1){
+                            const prestitoDetails = document.getElementById('prestitoDetails');
+                            prestitoDetails.style.display = 'block';
+                            document.getElementById('dataInizio').value = data.Data_inizio_prestito;
+                            document.getElementById('dataFine').value = data.Data_fine_prestito;
+                        }
                         console.log("data", data)
                         var dataAutore=data.ID_autore;
-                        var dataCategoria=data.ID_categoria;
-                        fetch('get_data.php?type=categorie')
+                        //var dataCategoria=data.ID_categoria;
+                        /*fetch('get_data.php?type=categorie')
                         .then(response => response.json())
                         .then(data => populateSelect('categoria', data, dataCategoria));
-                    
+                    */
                         fetch('get_data.php?type=autori')
                         .then(response => response.json())
                         .then(data => populateSelect('autore', data, dataAutore));

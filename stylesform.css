@@ -1,8 +1,8 @@
 body{
     background-image: url(bibbia2.jpg);
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+    background-size: cover; /* Adatta l'immagine all'area di sfondo */
+    background-repeat: no-repeat; /* Evita che l'immagine si ripeta */
+    background-attachment: fixed; /* Fissa l'immagine di sfondo */
     height: 100vh;
    }
    .titolo{
@@ -16,9 +16,9 @@ body{
    .divform{
      
 background-color:rgb(245, 242, 237);
-width: 65%;
+width: 70%;
 
-margin-left: 17%;
+margin-left: 15%;
 margin-top:3.5% ;
 margin-bottom: 5%;
 height: auto;

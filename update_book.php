@@ -7,20 +7,30 @@ $titolo = $_POST['titolo'];
 $numero_pagine = $_POST['numero_pagine'];
 $casa_editrice = $_POST['casa_editrice'];
 $quantita = $_POST['quantita'];
-$id_categoria = $_POST['categoria'];
+$dataInizio = isset($_POST['dataInizio']) ? $_POST['dataInizio'] : null;
+$dataFine = isset($_POST['dataFine']) ? $_POST['dataFine'] : null;
 $id_autore = $_POST['autore'];
 $response = [];
 
 try {
     // Aggiornamento delle informazioni del libro
-    $sql = "UPDATE Libro L
-            JOIN LibroAutore LA ON L.ID_libro = LA.ID_libro
-            JOIN Autore A ON LA.ID_autore = A.ID_autore
-            JOIN Categoria C ON L.ID_categoria = C.ID_categoria
-            SET L.ISBN = ?, L.Titolo = ?, L.Numero_pagine = ?, L.Casa_editrice = ?, L.quantita = ?, LA.ID_autore = ?, L.ID_categoria = ?
-            WHERE L.ID_libro = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("ssisiiii", $isbn, $titolo, $numero_pagine, $casa_editrice, $quantita, $id_autore, $id_categoria, $ID_libro);
+    if ($dataInizio == null && $dataFine == null){
+        $sql = "UPDATE Libro L
+                JOIN LibroAutore LA ON L.ID_libro = LA.ID_libro
+                JOIN Autore A ON LA.ID_autore = A.ID_autore
+                SET L.ISBN = ?, L.Titolo = ?, L.Numero_pagine = ?, L.Casa_editrice = ?, L.quantita = ?, LA.ID_autore = ?
+                WHERE L.ID_libro = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("ssisiii", $isbn, $titolo, $numero_pagine, $casa_editrice, $quantita, $id_autore, $ID_libro);
+    }else{
+        $sql = "UPDATE Libro L
+                JOIN LibroAutore LA ON L.ID_libro = LA.ID_libro
+                JOIN Autore A ON LA.ID_autore = A.ID_autore
+                SET L.ISBN = ?, L.Titolo = ?, L.Numero_pagine = ?, L.Casa_editrice = ?, L.quantita = ?, LA.ID_autore = ?, L.Data_inizio_prestito = ?, L.Data_fine_prestito = ?
+                WHERE L.ID_libro = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("ssisiissi", $isbn, $titolo, $numero_pagine, $casa_editrice, $quantita, $id_autore,$dataInizio, $dataFine, $ID_libro);
+    }
     $stmt->execute();
 
     if ($stmt->affected_rows > 0) {

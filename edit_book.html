@@ -24,7 +24,7 @@
                 <input type="text" class="form-control" id="titolo" name="titolo" required>
             </div>
             <div class="mb-3">
-                <label for="data_pubblicazione" class="form-label">Numero Pagine</label>
+                <label for="numero_pagine" class="form-label">Numero Pagine</label>
                 <input type="number" class="form-control" name="numero_pagine" id="numero_pagine">
             </div>
             <div class="mb-3">
@@ -34,6 +34,10 @@
             <div class="mb-3">
                 <label for="quantita" class="form-label">Quantità in Magazino</label>
                 <input type="number" class="form-control" name="quantita" id="quantita" required>
+            </div>
+            <div class="mb-3">
+                <label for="prezzo" class="form-label">Prezzo</label>
+                <input type="text" class="form-control" name="prezzo" id="prezzo" required>
             </div>
             <!--
             <div class="mb-3">
@@ -84,6 +88,7 @@
                         document.getElementById('numero_pagine').value = data.Numero_pagine;
                         document.getElementById('casa_editrice').value = data.Casa_editrice;
                         document.getElementById('quantita').value = data.quantita;
+                        document.getElementById('prezzo').value = data.prezzo;
                         if(data.Prestato==1){
                             const prestitoDetails = document.getElementById('prestitoDetails');
                             prestitoDetails.style.display = 'block';

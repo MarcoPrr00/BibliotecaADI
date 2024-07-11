@@ -56,6 +56,10 @@
 
             <div id="prestitoDetails" style="display: none;">
                 <div class="mb-3">
+                    <label for="utente" class="form-label">Utente che ha effettuato il prestito</label>
+                    <input type="text" class="form-control" id="utente" name="utente" readonly>
+                </div>
+                <div class="mb-3">
                     <label for="dataInizio" class="form-label">Data Inizio Prestito</label>
                     <input type="date" class="form-control" id="dataInizio" name="dataInizio">
                 </div>
@@ -74,9 +78,9 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const urlParams = new URLSearchParams(window.location.search);
-            const isbn = urlParams.get('isbn');
+            const ID_Libro = urlParams.get('id');
 
-            fetch(`get_book.php?isbn=${isbn}`)
+            fetch(`get_book.php?id=${ID_Libro}`)
                 .then(response => response.json())
                 .then(data => {
                     if (data.error) {
@@ -94,6 +98,7 @@
                             prestitoDetails.style.display = 'block';
                             document.getElementById('dataInizio').value = data.Data_inizio_prestito;
                             document.getElementById('dataFine').value = data.Data_fine_prestito;
+                            document.getElementById('utente').value = data.Utente;
                         }
                         console.log("data", data)
                         var dataAutore=data.ID_autore;

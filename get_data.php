@@ -26,7 +26,7 @@ switch ($type) {
         $sql = "SELECT L.ID_libro, L.ISBN, L.quantita, L.Titolo, L.prezzo, CONCAT(A.Nome, ' ', A.Cognome) AS Autore, L.Prestato, L.Data_inizio_prestito, L.Data_fine_prestito 
                 FROM Libro L 
                 JOIN LibroAutore LA ON L.ID_libro = LA.ID_libro
-                JOIN Autore A ON LA.ID_autore = A.ID_autore";
+                JOIN Autore A ON LA.ID_autore = A.ID_autore ORDER BY L.Titolo";
         break;
     case 'prestiti':
         $sql = "SELECT P.ID_prestito, CONCAT(U.Nome, ' ', U.Cognome) AS Utente, P.ISBN, L.Titolo, P.Data_inizio, P.Data_scadenza, P.Data_restituzione, DATEDIFF(P.Data_scadenza,current_date) AS Giorni_Rimasti 

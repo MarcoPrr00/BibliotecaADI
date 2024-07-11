@@ -96,14 +96,14 @@
                         const table = document.createElement('table');
                         table.classList.add('table', 'table-bordered');
                         const thead = document.createElement('thead');
-                        thead.innerHTML = '<tr><th>Utente</th><th>Libro (ISBN)</th><th>Titolo</th><th>Data Inizio</th><th>Data Fine</th><th>Data Restituzione</th></th><th>Giorni Restanti</th><th>Azioni Disponibili</th></tr>';
+                        thead.innerHTML = '<tr><th>Utente</th><th>Titolo Libro</th><th>Data Inizio</th><th>Data Fine</th><th>Data Restituzione</th></th><th>Giorni Restanti</th><th>Azioni Disponibili</th></tr>';
                         table.appendChild(thead);
                         const tbody = document.createElement('tbody');
                         data.forEach(loan => {
                             const tr = document.createElement('tr');
                             $loanGiorniRimasti = `${loan.Giorni_Rimasti}`;
                             if ($loanGiorniRimasti > 30) {
-                                tr.innerHTML = `<td>${loan.Utente}</td><td>${loan.ISBN}</td><td>${loan.Titolo}</td><td>${loan.Data_inizio}</td><td>${loan.Data_scadenza}</td><td>${loan.Data_restituzione}</td><td class="table-success text-success"><b>${loan.Giorni_Rimasti}</b></td>
+                                tr.innerHTML = `<td>${loan.Utente}</td><td>${loan.Titolo}</td><td>${loan.Data_inizio}</td><td>${loan.Data_scadenza}</td><td>${loan.Data_restituzione}</td><td class="table-success text-success"><b>${loan.Giorni_Rimasti}</b></td>
                                 <td>
                                     <a href="edit_loan.html?id=${loan.ID_prestito}" class="btn btn-warning btn-sm"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
   <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
@@ -114,7 +114,7 @@
 </svg></button>
                                 </td>`;
                             } else if ($loanGiorniRimasti < 10) {
-                                tr.innerHTML = `<td>${loan.Utente}</td><td>${loan.ISBN}</td><td>${loan.Titolo}</td><td>${loan.Data_inizio}</td><td>${loan.Data_scadenza}</td><td>${loan.Data_restituzione}</td><td class="table-danger text-danger"><b>${loan.Giorni_Rimasti}</b></td>
+                                tr.innerHTML = `<td>${loan.Utente}</td><td>${loan.Titolo}</td><td>${loan.Data_inizio}</td><td>${loan.Data_scadenza}</td><td>${loan.Data_restituzione}</td><td class="table-danger text-danger"><b>${loan.Giorni_Rimasti}</b></td>
                                 <td>
                                     <a href="edit_loan.html?id=${loan.ID_prestito}" class="btn btn-warning btn-sm"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
   <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
@@ -125,7 +125,7 @@
 </svg></button>
                                 </td>`;
                             } else {
-                                tr.innerHTML = `<td>${loan.Utente}</td><td>${loan.ISBN}</td><td>${loan.Titolo}</td><td>${loan.Data_inizio}</td><td>${loan.Data_scadenza}</td><td>${loan.Data_restituzione}</td><td class="table-warning text-warning"><b>${loan.Giorni_Rimasti}</b></td>
+                                tr.innerHTML = `<td>${loan.Utente}</td><td>${loan.Titolo}</td><td>${loan.Data_inizio}</td><td>${loan.Data_scadenza}</td><td>${loan.Data_restituzione}</td><td class="table-warning text-warning"><b>${loan.Giorni_Rimasti}</b></td>
                                 <td>
                                     <a href="edit_loan.html?id=${loan.ID_prestito}" class="btn btn-warning btn-sm"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
   <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>

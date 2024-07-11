@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Lug 11, 2024 alle 14:22
+-- Creato il: Lug 11, 2024 alle 17:24
 -- Versione del server: 10.4.28-MariaDB
 -- Versione PHP: 8.2.4
 
@@ -142,6 +142,7 @@ CREATE TABLE `libroautore` (
 --
 
 INSERT INTO `libroautore` (`ID_libro`, `ID_autore`) VALUES
+(0, 19),
 (8, 1),
 (9, 1),
 (10, 3),
@@ -166,7 +167,11 @@ INSERT INTO `libroautore` (`ID_libro`, `ID_autore`) VALUES
 (29, 15),
 (30, 15),
 (31, 16),
-(32, 17);
+(32, 17),
+(33, 19),
+(38, 7),
+(40, 7),
+(41, 18);
 
 -- --------------------------------------------------------
 
@@ -178,7 +183,7 @@ CREATE TABLE `prestito` (
   `ID_prestito` int(11) NOT NULL,
   `ID_copia` int(11) DEFAULT NULL,
   `ID_utente` int(11) DEFAULT NULL,
-  `ISBN` varchar(20) NOT NULL,
+  `ID_libro` int(11) NOT NULL,
   `Data_inizio` date NOT NULL,
   `Data_scadenza` date NOT NULL,
   `Data_restituzione` date DEFAULT NULL
@@ -188,10 +193,8 @@ CREATE TABLE `prestito` (
 -- Dump dei dati per la tabella `prestito`
 --
 
-INSERT INTO `prestito` (`ID_prestito`, `ID_copia`, `ID_utente`, `ISBN`, `Data_inizio`, `Data_scadenza`, `Data_restituzione`) VALUES
-(3, NULL, 2, '9788833065045', '2024-06-11', '2024-06-30', NULL),
-(5, NULL, 3, '9788833065045', '2024-06-11', '2024-06-20', '2024-06-15'),
-(6, NULL, 1, '9788833064963', '2024-06-12', '2024-07-31', NULL);
+INSERT INTO `prestito` (`ID_prestito`, `ID_copia`, `ID_utente`, `ID_libro`, `Data_inizio`, `Data_scadenza`, `Data_restituzione`) VALUES
+(7, NULL, 5, 25, '2024-07-11', '2024-07-30', NULL);
 
 -- --------------------------------------------------------
 
@@ -263,7 +266,7 @@ ALTER TABLE `prestito`
   ADD PRIMARY KEY (`ID_prestito`),
   ADD KEY `ID_copia` (`ID_copia`),
   ADD KEY `ID_utente` (`ID_utente`),
-  ADD KEY `ISBN` (`ISBN`);
+  ADD KEY `ISBN` (`ID_libro`);
 
 --
 -- Indici per le tabelle `utente`
@@ -297,13 +300,13 @@ ALTER TABLE `copia`
 -- AUTO_INCREMENT per la tabella `libro`
 --
 ALTER TABLE `libro`
-  MODIFY `ID_libro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `ID_libro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT per la tabella `prestito`
 --
 ALTER TABLE `prestito`
-  MODIFY `ID_prestito` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `ID_prestito` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT per la tabella `utente`

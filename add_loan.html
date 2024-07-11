@@ -156,7 +156,7 @@
                 .then(data => {
                     const select = $('#libroISBN');
                     data.forEach(user => {
-                        const option = new Option(`Titolo: ${user.Titolo} - ISBN: ${user.ISBN}`, user.ISBN, false, false);
+                        const option = new Option(`Titolo: ${user.Titolo} - Autore: ${user.Autore}`, user.ID_libro, false, false);
                         select.append(option);
                     }); 
                     select.selectpicker('refresh');

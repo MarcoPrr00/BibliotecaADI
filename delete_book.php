@@ -1,13 +1,13 @@
 <?php
 require 'db.php';
 
-$isbn = $_GET['isbn'];
+$id = $_GET['id'];
 $response = [];
 
 try {
-    $sql = "DELETE FROM Libro WHERE ISBN = ?";
+    $sql = "DELETE FROM Libro WHERE ID_libro = ?";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("s", $isbn);
+    $stmt->bind_param("s", $id);
     $stmt->execute();
 
     if ($stmt->affected_rows > 0) {

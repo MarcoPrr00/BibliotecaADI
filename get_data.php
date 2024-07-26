@@ -16,7 +16,7 @@ switch ($type) {
         $sql = "SELECT ID_categoria, Descrizione FROM Categoria";
         break;
     case 'autori':
-        $sql = "SELECT ID_autore, Nome, Cognome FROM Autore";
+        $sql = "SELECT ID_autore, Nome, Cognome FROM Autore ORDER BY Nome, Cognome";
         break;
     case 'utenti':
         $sql = "SELECT ID_utente, Nome, Cognome, Indirizzo, Data_nascita, Numero_telefono FROM Utente";
@@ -33,6 +33,15 @@ switch ($type) {
                 FROM Prestito P 
                 JOIN Utente U ON P.ID_utente = U.ID_utente
                 JOIN Libro L ON P.ID_libro = L.ID_libro
+                WHERE Data_restituzione IS NULL
+                ORDER BY P.Data_inizio DESC";
+        break;
+    case 'CronologiaPrestiti':
+        $sql = "SELECT P.ID_prestito, CONCAT(U.Nome, ' ', U.Cognome) AS Utente, P.ID_libro, L.Titolo, P.Data_inizio, P.Data_scadenza, P.Data_restituzione, DATEDIFF(P.Data_scadenza,current_date) AS Giorni_Rimasti 
+                FROM Prestito P 
+                JOIN Utente U ON P.ID_utente = U.ID_utente
+                JOIN Libro L ON P.ID_libro = L.ID_libro
+                WHERE Data_restituzione IS NOT NULL
                 ORDER BY P.Data_inizio DESC";
         break;
     case 'search_books':
